@@ -9,6 +9,7 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.Rect;
 import android.os.BatteryManager;
 import android.provider.Settings;
+import android.telephony.TelephonyManager;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Window;
@@ -72,5 +73,13 @@ public class DeviceUtils {
         }
         window.getDecorView().getWindowVisibleDisplayFrame(windowDisplayFrame);
         return windowDisplayFrame.top;
+    }
+
+    public static String getFirstPhoneNumber(Context context) {
+        if (context == null) {
+            return null;
+        }
+        TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+        return telephonyManager.getLine1Number();
     }
 }

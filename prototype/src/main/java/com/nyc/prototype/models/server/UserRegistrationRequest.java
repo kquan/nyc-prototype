@@ -1,0 +1,32 @@
+package com.nyc.prototype.models.server;
+
+import com.nyc.prototype.models.UserInfo;
+
+/**
+ * Created by Kevin on 1/28/2015.
+ */
+public class UserRegistrationRequest extends BaseServerRequest {
+
+    @SuppressWarnings("unused")
+    private static final String TAG = UserRegistrationRequest.class.getSimpleName();
+
+    protected String samsungAccount;
+    protected UserInfo user;
+
+    public UserRegistrationRequest() {
+        // For GSON
+    }
+
+    public UserInfo getUserInfo() {
+        return user;
+    }
+
+    public String getSamsungAccountEmail() {
+        return samsungAccount;
+    }
+
+    @Override public boolean isValid() {
+        // When registering, there MUST be device information for the user
+        return user != null && user.getFirstDevice() != null;
+    }
+}

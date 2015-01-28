@@ -2,6 +2,7 @@ package com.nyc.accounts;
 
 import android.accounts.Account;
 import android.content.Context;
+import android.text.TextUtils;
 
 import com.nyc.utils.AccountUtils;
 
@@ -32,6 +33,13 @@ public class SamsungAccountHelper {
 
     public static Account getFirstSamsungAccount(Context context) {
         return AccountUtils.getFirstAccountsOf(context, ACCOUNT_TYPE_SAMSUNG);
+    }
+
+    public static boolean isAccountASamsungAccount(Account account) {
+        if (account == null || TextUtils.isEmpty(account.type)) {
+            return false;
+        }
+        return ACCOUNT_TYPE_SAMSUNG.equals(account.type);
     }
 
 }
