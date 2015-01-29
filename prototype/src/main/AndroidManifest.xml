@@ -15,6 +15,11 @@
 
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE"/>
 
+    <permission
+        android:name="com.nyc.prototype.permission.C2D_MESSAGE"
+        android:protectionLevel="signature"/>
+    <uses-permission android:name="com.nyc.prototype.permission.C2D_MESSAGE"/>
+
     <uses-feature
         android:name="android.hardware.telephony"
         android:required="false"/>
@@ -42,10 +47,22 @@
 
         <service android:name=".user.RequestPhoneNumberVerificationService"/>
         <service android:name=".user.VerifyPhoneNumberService"/>
+        <service android:name=".gcm.UpdateGcmIdOnServerService"/>
+        <service android:name=".gcm.HandleGcmService"/>
 
         <receiver android:name=".user.VerifyPhoneNumberSMSReceiver">
             <intent-filter>
                 <action android:name="android.provider.Telephony.SMS_RECEIVED"/>
+            </intent-filter>
+        </receiver>
+
+        <receiver
+            android:name=".gcm.HandleGcmReceivedReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE"/>
+
+                <category android:name="com.kevinquan.palantir"/>
             </intent-filter>
         </receiver>
 

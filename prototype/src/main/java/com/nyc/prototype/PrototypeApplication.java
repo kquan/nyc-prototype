@@ -14,6 +14,8 @@ public class PrototypeApplication extends Application {
     @SuppressWarnings("unused")
     private static final String TAG = PrototypeApplication.class.getSimpleName();
 
+    public static final String GCM_SENDER_ID = "add_this_in_later";
+
     public interface Preferences {
 
     }

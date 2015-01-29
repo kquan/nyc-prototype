@@ -2,6 +2,7 @@ package com.nyc.prototype.api;
 
 import com.nyc.models.BaseServerResponse;
 import com.nyc.prototype.models.server.StartPhoneNumberVerificationRequest;
+import com.nyc.prototype.models.server.UpdateGcmIdRequest;
 import com.nyc.prototype.models.server.VerifyPhoneNumberRequest;
 
 import retrofit.http.Body;
@@ -21,4 +22,7 @@ public interface PrototypeService {
 
     @POST("/account/verifyPhone")
     BaseServerResponse verifyPhoneNumber(@Body VerifyPhoneNumberRequest request);
+
+    @POST("/account/updateGcm")
+    BaseServerResponse updateGcmId(@Body UpdateGcmIdRequest request);
 }
