@@ -158,5 +158,6 @@ public class GCM {
             Log.e(TAG, "GCM returned an empty id");
             return null;
         }
+        return newRegistrationId;
     }
 }
