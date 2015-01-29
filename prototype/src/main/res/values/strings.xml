@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">prototype</string>
+
+    <string name="account_sms_verification_prefix">Your [TBAAPPNAME] verification code is: </string>
 </resources>

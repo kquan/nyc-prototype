@@ -1,5 +1,6 @@
 package com.nyc.prototype.models.server;
 
+import android.content.Context;
 import android.text.TextUtils;
 
 /**
@@ -16,6 +17,13 @@ public class VerifyPhoneNumberRequest extends BaseServerRequest {
 
     public VerifyPhoneNumberRequest() {
         // For GSON
+    }
+
+    public VerifyPhoneNumberRequest(Context context, String userId, String phoneNumber, String verificationCode) {
+        super(context);
+        user = userId;
+        phone = phoneNumber;
+        code = verificationCode;
     }
 
     public String getUserId() {
