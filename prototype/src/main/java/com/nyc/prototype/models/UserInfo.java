@@ -12,6 +12,7 @@ public class UserInfo extends BaseGsonModel {
 
     protected String firstName;
     protected String lastName;
+    protected String displayName;
     // For future use
     //protected String email;
     protected String profilePhoto;
@@ -30,6 +31,10 @@ public class UserInfo extends BaseGsonModel {
 
     public String getLastName() {
         return lastName;
+    }
+
+    public String getDisplayName() {
+        return displayName;
     }
 
     public String getProfilePhotoUri() {
@@ -68,6 +73,18 @@ public class UserInfo extends BaseGsonModel {
 
     public AccountInfo[] getAccountEmails() {
         return accounts;
+    }
+
+    public boolean hasEmail(String email) {
+        if (accounts == null) {
+            return false;
+        }
+        for (AccountInfo info : accounts) {
+            if (info.getEmail().equals(email)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public DeviceInfo[] getDevices() {

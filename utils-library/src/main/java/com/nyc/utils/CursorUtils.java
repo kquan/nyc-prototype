@@ -105,4 +105,8 @@ public class CursorUtils {
         }
         return false;
     }
+
+    public static boolean hasResults(Cursor cursor) {
+        return cursor != null && cursor.getCount() > 0 && cursor.moveToFirst();
+    }
 }
