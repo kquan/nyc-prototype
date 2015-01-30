@@ -22,6 +22,7 @@ public class PrototypeApplication extends Application {
 
     public interface Broadcasts {
         public static final String USER_REGISTRATION_COMPLETED = "com.nyc.prototype.user.REGISTRATION_COMPLETE";
+        public static final String USER_REGISTRATION_FAILED = "com.nyc.prototype.user.REGISTRATION_FAILED";
     }
 
     @Override

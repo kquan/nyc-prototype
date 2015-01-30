@@ -1,5 +1,7 @@
 package com.nyc.prototype.models.server;
 
+import android.content.Context;
+
 import com.nyc.prototype.models.UserInfo;
 
 /**
@@ -15,6 +17,12 @@ public class UserRegistrationRequest extends BaseServerRequest {
 
     public UserRegistrationRequest() {
         // For GSON
+    }
+
+    public UserRegistrationRequest(Context context, String samsungAccountEmail, UserInfo userInfo) {
+        super(context);
+        samsungAccount = samsungAccountEmail;
+        user = userInfo;
     }
 
     public UserInfo getUserInfo() {

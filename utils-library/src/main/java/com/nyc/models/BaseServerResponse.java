@@ -18,4 +18,8 @@ public class BaseServerResponse extends BaseGsonModel {
         return time;
     }
 
+    @Override public boolean isValid() {
+        return time > 0;
+    }
+
 }

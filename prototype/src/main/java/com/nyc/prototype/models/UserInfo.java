@@ -2,6 +2,8 @@ package com.nyc.prototype.models;
 
 import com.nyc.models.BaseGsonModel;
 
+import java.util.Collection;
+
 /**
  * Created by Kevin on 1/28/2015.
  */
@@ -23,6 +25,11 @@ public class UserInfo extends BaseGsonModel {
 
     public UserInfo() {
         // For GSON
+    }
+
+    public UserInfo setDisplayName(final String displayName) {
+        this.displayName = displayName;
+        return this;
     }
 
     public String getFirstName() {
@@ -53,6 +60,24 @@ public class UserInfo extends BaseGsonModel {
             accounts = newAccounts;
         }
         accounts[accounts.length-1] = info;
+        return this;
+    }
+
+    public UserInfo addAccountEmails(Collection<AccountInfo> info) {
+        if (info == null || info.isEmpty()) {
+            return this;
+        }
+        int oldSize = 0;
+        if (accounts == null) {
+            accounts = new AccountInfo[info.size()];
+        } else {
+            AccountInfo[] newAccounts = new AccountInfo[accounts.length+info.size()];
+            System.arraycopy(accounts, 0, newAccounts, 0, accounts.length);
+            oldSize = accounts.length;
+            accounts = newAccounts;
+        }
+        AccountInfo[] newInfos = info.toArray(new AccountInfo[0]);
+        System.arraycopy(newInfos, 0, accounts, oldSize, newInfos.length);
         return this;
     }
 

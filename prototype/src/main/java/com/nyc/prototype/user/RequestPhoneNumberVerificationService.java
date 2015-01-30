@@ -10,6 +10,7 @@ import com.nyc.prototype.api.PrototypeService;
 import com.nyc.prototype.api.RetrofitHelper;
 import com.nyc.prototype.models.server.StartPhoneNumberVerificationRequest;
 import com.nyc.utils.DeviceUtils;
+import com.nyc.utils.NetworkUtils;
 
 import retrofit.RetrofitError;
 
@@ -41,6 +42,10 @@ public class RequestPhoneNumberVerificationService extends IntentService {
 
         StartPhoneNumberVerificationRequest request = new StartPhoneNumberVerificationRequest(this, userId, phoneNumber);
         PrototypeService service = RetrofitHelper.createPrototypeService();
+        if (!NetworkUtils.hasNetworkConnection(this)) {
+            Log.w(TAG, "No network connection available");
+            return;
+        }
 
         long start = System.currentTimeMillis();
         try {
