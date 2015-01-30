@@ -73,6 +73,16 @@ public class AccountInfo extends BaseGsonModel {
         return email.hashCode();
     }
 
+    @Override public boolean equals(Object o) {
+        // Note this only takes into account email, and not the type.
+        // The reason is we use this method to remove duplicates when sending
+        // multiple emails to the server
+        if (!(o instanceof AccountInfo)) {
+            return false;
+        }
+        return TextUtils.equals(email, ((AccountInfo)o).email);
+    }
+
     @Override public String toString() {
         return email+" ("+type+")";
     }

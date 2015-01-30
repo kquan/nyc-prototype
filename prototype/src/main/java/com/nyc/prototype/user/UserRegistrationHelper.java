@@ -31,12 +31,17 @@ public class UserRegistrationHelper {
      * Merges account emails with profile emails, and removes any Samsung account emails.
      */
     public static Collection<AccountInfo> getAllAccountInfo(Context context) {
+        // This leverages the fact that AccountInfo only compares emails when comparing for equality
+        // If this is not true in the future, we need to convert this to a Hashtable with key based
+        // on the email address.
         HashSet<AccountInfo> allInfo = new HashSet<AccountInfo>();
         Collection<Account> accountEmails = getNonSamsungEmailAccounts(context);
         for (Iterator<Account> i = accountEmails.iterator(); i.hasNext();) {
             Account account = i.next();
             AccountInfo info = AccountInfo.createAccountInfo(account);
-            if (info != null) {
+            if (info != null
+                    // Same email might be used for multiple accounts
+                    && !allInfo.contains(info)) {
                 allInfo.add(info);
             }
         }
@@ -44,7 +49,7 @@ public class UserRegistrationHelper {
         for (Iterator<String> i = profileEmails.iterator(); i.hasNext();) {
             String email = i.next();
             AccountInfo info = AccountInfo.createAndroidProfileAccountInfo(email);
-            if (info != null) {
+            if (info != null && !allInfo.contains(info)) {
                 allInfo.add(info);
             }
         }
