@@ -4,6 +4,8 @@ import android.app.IntentService;
 import android.content.Intent;
 import android.util.Log;
 
+import com.nyc.prototype.PrototypeApplication;
+
 /**
  * Created by Kevin on 1/30/2015.
  */
@@ -19,6 +21,18 @@ public class UserRegistrationService extends IntentService {
     @Override
     protected void onHandleIntent(final Intent intent) {
         Log.d(TAG, "Running user registration service");
-        new UserRegistrationCallable(this).run();
+        UserRegistrationResult result = null;
+        try {
+            result = new UserRegistrationCallable(this).call();
+        } catch (Exception e) {
+            Log.e(TAG, "Could not register user", e);
+        }
+
+        if (result == null) {
+            sendBroadcast(new Intent(PrototypeApplication.Broadcasts.USER_REGISTRATION_FAILED));
+        } else {
+            Log.d(TAG, "User registration completed, sending broadcast.");
+            sendBroadcast(new Intent(PrototypeApplication.Broadcasts.USER_REGISTRATION_COMPLETED));
+        }
     }
 }

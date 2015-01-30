@@ -6,12 +6,10 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.nyc.models.BaseServerResponse;
-import com.nyc.prototype.api.PrototypeService;
+import com.nyc.prototype.api.BasicServiceCallable;
 import com.nyc.prototype.api.RetrofitHelper;
 import com.nyc.prototype.models.server.UpdateGcmIdRequest;
 import com.nyc.prototype.user.CurrentUserHelper;
-
-import retrofit.RetrofitError;
 
 /**
  * Created by Kevin on 1/29/2015.
@@ -40,16 +38,15 @@ public class UpdateGcmIdOnServerService extends IntentService {
             return;
         }
 
-        UpdateGcmIdRequest request = new UpdateGcmIdRequest(this, user, gcmId);
-        PrototypeService service = RetrofitHelper.createPrototypeService();
+        final UpdateGcmIdRequest request = new UpdateGcmIdRequest(this, user, gcmId);
+        new BasicServiceCallable<BaseServerResponse>(this) {
+            @Override protected BaseServerResponse doServiceCall() {
+                return RetrofitHelper.createPrototypeService().updateGcmId(request);
+            }
 
-        long start = System.currentTimeMillis();
-        try {
-            BaseServerResponse response = service.updateGcmId(request);
-        } catch (RetrofitError error) {
-            Log.w(TAG, "Could not update GCM ID.");
-            RetrofitHelper.handleRetrofitError(error);
-        }
-        Log.v(TAG, "GCM ID update completed.  Took: "+(System.currentTimeMillis()- start)+"ms.");
+            @Override protected String getCallDescription() {
+                return "update GCM ID";
+            }
+        }.invoke();
     }
 }

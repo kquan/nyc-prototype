@@ -6,13 +6,10 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.nyc.models.BaseServerResponse;
-import com.nyc.prototype.api.PrototypeService;
+import com.nyc.prototype.api.BasicServiceCallable;
 import com.nyc.prototype.api.RetrofitHelper;
 import com.nyc.prototype.models.server.StartPhoneNumberVerificationRequest;
 import com.nyc.utils.DeviceUtils;
-import com.nyc.utils.NetworkUtils;
-
-import retrofit.RetrofitError;
 
 /**
  * Created by Kevin on 1/29/2015.
@@ -40,20 +37,15 @@ public class RequestPhoneNumberVerificationService extends IntentService {
             Log.w(TAG, "No phone number to verify");
         }
 
-        StartPhoneNumberVerificationRequest request = new StartPhoneNumberVerificationRequest(this, userId, phoneNumber);
-        PrototypeService service = RetrofitHelper.createPrototypeService();
-        if (!NetworkUtils.hasNetworkConnection(this)) {
-            Log.w(TAG, "No network connection available");
-            return;
-        }
+        final StartPhoneNumberVerificationRequest request = new StartPhoneNumberVerificationRequest(this, userId, phoneNumber);
+        new BasicServiceCallable<BaseServerResponse>(this) {
+            @Override protected BaseServerResponse doServiceCall() {
+                return RetrofitHelper.createPrototypeService().requestPhoneNumberVerification(request);
+            }
 
-        long start = System.currentTimeMillis();
-        try {
-            BaseServerResponse response = service.requestPhoneNumberVerification(request);
-        } catch (RetrofitError error) {
-            Log.w(TAG, "Could not request phone number verification.");
-            RetrofitHelper.handleRetrofitError(error);
-        }
-        Log.v(TAG, "Phone number verification request completed.  Took: "+(System.currentTimeMillis()- start)+"ms.");
+            @Override protected String getCallDescription() {
+                return "phone number verification request";
+            }
+        }.invoke();
     }
 }
