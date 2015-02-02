@@ -1,6 +1,7 @@
 package com.nyc.prototype.gcm;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
@@ -158,6 +159,8 @@ public class GCM {
             Log.e(TAG, "GCM returned an empty id");
             return null;
         }
+        saveRegistrationId(context, newRegistrationId);
+        context.startService(new Intent(context, UpdateGcmIdOnServerService.class).putExtra(UpdateGcmIdOnServerService.EXTRA_GCM_ID, newRegistrationId));
         return newRegistrationId;
     }
 }
