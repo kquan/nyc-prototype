@@ -17,7 +17,7 @@ public class PrototypeApplication extends Application {
     public static final String GCM_SENDER_ID = "add_this_in_later";
 
     public interface Preferences {
-
+        public static final String STATE_WAITING_FOR_VERIFICATION = "StateWaitingForVerification";
     }
 
     public interface Broadcasts {

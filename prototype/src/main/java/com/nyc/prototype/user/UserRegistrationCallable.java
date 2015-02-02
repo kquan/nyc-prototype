@@ -7,6 +7,7 @@ import android.util.Log;
 
 import com.nyc.CallableWithContext;
 import com.nyc.accounts.SamsungAccountHelper;
+import com.nyc.prototype.PrototypeApplication;
 import com.nyc.prototype.api.BasicServiceCallable;
 import com.nyc.prototype.api.CallResult;
 import com.nyc.prototype.api.PrototypeService;
@@ -18,6 +19,7 @@ import com.nyc.prototype.models.UserInfo;
 import com.nyc.prototype.models.server.UserRegistrationRequest;
 import com.nyc.prototype.models.server.UserRegistrationResponse;
 import com.nyc.utils.NetworkUtils;
+import com.nyc.utils.PreferenceUtils;
 
 import java.util.Collection;
 
@@ -94,6 +96,7 @@ public class UserRegistrationCallable extends CallableWithContext<UserRegistrati
         CurrentUserHelper.saveCurrentUserId(context, userId);
         Log.d(TAG, "Saved new user ID: "+userId);
         */
+        PreferenceUtils.getMultiProcessAwarePreferences(context).edit().putBoolean(PrototypeApplication.Preferences.STATE_WAITING_FOR_VERIFICATION, true).apply();
         return UserRegistrationResult.OK;
     }
 
