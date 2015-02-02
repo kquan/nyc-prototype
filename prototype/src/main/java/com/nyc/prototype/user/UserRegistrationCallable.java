@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.nyc.CallableWithContext;
 import com.nyc.accounts.SamsungAccountHelper;
 import com.nyc.prototype.api.BasicServiceCallable;
 import com.nyc.prototype.api.CallResult;
@@ -18,9 +19,7 @@ import com.nyc.prototype.models.server.UserRegistrationRequest;
 import com.nyc.prototype.models.server.UserRegistrationResponse;
 import com.nyc.utils.NetworkUtils;
 
-import java.lang.ref.WeakReference;
 import java.util.Collection;
-import java.util.concurrent.Callable;
 
 /**
  * Created by Kevin on 1/30/2015.
@@ -29,15 +28,13 @@ import java.util.concurrent.Callable;
  *
  * It is a runnable so that it can be called within an AsyncTask or Service depending on the UX requirements
  */
-public class UserRegistrationCallable implements Callable<UserRegistrationResult> {
+public class UserRegistrationCallable extends CallableWithContext<UserRegistrationResult> {
 
     @SuppressWarnings("unused")
     private static final String TAG = UserRegistrationCallable.class.getSimpleName();
 
-    protected WeakReference<Context> mContextReference;
-
     public UserRegistrationCallable(Context context) {
-        mContextReference = new WeakReference<Context>(context);
+        super(context);
     }
 
     @Override
