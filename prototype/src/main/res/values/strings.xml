@@ -2,4 +2,5 @@
     <string name="app_name">prototype</string>
 
     <string name="account_sms_verification_prefix">Your [TBAAPPNAME] verification code is: </string>
+    <string name="account_logoff_status">Logging off&#8230;</string>
 </resources>

@@ -1,6 +1,7 @@
 package com.nyc.prototype.api;
 
 import com.nyc.models.BaseServerResponse;
+import com.nyc.prototype.models.server.BaseServerRequest;
 import com.nyc.prototype.models.server.StartPhoneNumberVerificationRequest;
 import com.nyc.prototype.models.server.UpdateGcmIdRequest;
 import com.nyc.prototype.models.server.UserRegistrationRequest;
@@ -28,6 +29,9 @@ public interface PrototypeService {
     @POST("/account/updateGcm")
     BaseServerResponse updateGcmId(@Body UpdateGcmIdRequest request);
 
-    @POST("/acount/register")
+    @POST("/account/register")
     UserRegistrationResponse registerUser(@Body UserRegistrationRequest request);
+
+    @POST("/account/logout")
+    BaseServerResponse logout(@Body BaseServerRequest request);
 }
