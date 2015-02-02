@@ -83,6 +83,8 @@ public class UserRegistrationCallable extends CallableWithContext<UserRegistrati
         if (!response.isOk()) {
             return UserRegistrationResult.ERROR_SERVER;
         }
+        /*
+        TODO: This needs to change as we need to verify phone number before we have the user ID
         String userId = response.getServerResponse().getUserId();
         if (TextUtils.isEmpty(userId)) {
             Log.e(TAG, "Server response did not contain user ID");
@@ -91,6 +93,7 @@ public class UserRegistrationCallable extends CallableWithContext<UserRegistrati
 
         CurrentUserHelper.saveCurrentUserId(context, userId);
         Log.d(TAG, "Saved new user ID: "+userId);
+        */
         return UserRegistrationResult.OK;
     }
 

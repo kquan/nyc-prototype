@@ -5,10 +5,11 @@ import android.content.Intent;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.nyc.models.BaseServerResponse;
 import com.nyc.prototype.api.BasicServiceCallable;
+import com.nyc.prototype.api.CallResult;
 import com.nyc.prototype.api.RetrofitHelper;
 import com.nyc.prototype.models.server.VerifyPhoneNumberRequest;
+import com.nyc.prototype.models.server.VerifyPhoneNumberResponse;
 import com.nyc.utils.DeviceUtils;
 
 /**
@@ -57,8 +58,8 @@ public class VerifyPhoneNumberService extends IntentService {
         Log.d(TAG, "Verifying "+phoneNumber+" for "+userId+" with "+verificationCode);
 
         final VerifyPhoneNumberRequest request = new VerifyPhoneNumberRequest(this, userId, phoneNumber, verificationCode);
-        new BasicServiceCallable<BaseServerResponse>(this) {
-            @Override protected BaseServerResponse doServiceCall() {
+        CallResult<VerifyPhoneNumberResponse> result = new BasicServiceCallable<VerifyPhoneNumberResponse>(this) {
+            @Override protected VerifyPhoneNumberResponse doServiceCall() {
                 return RetrofitHelper.createPrototypeService().verifyPhoneNumber(request);
             }
 
@@ -66,6 +67,17 @@ public class VerifyPhoneNumberService extends IntentService {
                 return "send phone number verification";
             }
         }.invoke();
+
+        if (result.isOk()) {
+            VerifyPhoneNumberResponse response = result.getServerResponse();
+            if (!TextUtils.isEmpty(response.getUserId())) {
+                Log.d(TAG, "Saving current user ID: "+response.getUserId());
+                CurrentUserHelper.saveCurrentUserId(this, response.getUserId(), phoneNumber, DeviceUtils.getDeviceId(this));
+            } else {
+                Log.d(TAG, "Verified new channel for: "+phoneNumber);
+                CurrentUserHelper.updateChannel(this, phoneNumber, DeviceUtils.getDeviceId(this));
+            }
+        }
     }
 
 }

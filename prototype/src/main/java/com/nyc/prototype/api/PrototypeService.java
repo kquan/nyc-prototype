@@ -7,6 +7,7 @@ import com.nyc.prototype.models.server.UpdateGcmIdRequest;
 import com.nyc.prototype.models.server.UserRegistrationRequest;
 import com.nyc.prototype.models.server.UserRegistrationResponse;
 import com.nyc.prototype.models.server.VerifyPhoneNumberRequest;
+import com.nyc.prototype.models.server.VerifyPhoneNumberResponse;
 
 import retrofit.http.Body;
 import retrofit.http.GET;
@@ -24,7 +25,7 @@ public interface PrototypeService {
     BaseServerResponse requestPhoneNumberVerification(@Body StartPhoneNumberVerificationRequest request);
 
     @POST("/account/verifyPhone")
-    BaseServerResponse verifyPhoneNumber(@Body VerifyPhoneNumberRequest request);
+    VerifyPhoneNumberResponse verifyPhoneNumber(@Body VerifyPhoneNumberRequest request);
 
     @POST("/account/updateGcm")
     BaseServerResponse updateGcmId(@Body UpdateGcmIdRequest request);

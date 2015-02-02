@@ -47,7 +47,7 @@ public class CurrentUserHelper {
         return true;
     }
 
-    public static boolean verifyNewChannel(Context context, String phoneNumber, String deviceId) {
+    public static boolean updateChannel(Context context, String phoneNumber, String deviceId) {
         if (context == null) {
             Log.w(TAG, "No context available to set channel");
             return false;

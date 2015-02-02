@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.nyc.prototype.debug.DebugActivity;
+import com.nyc.prototype.gcm.GCM;
 
 import butterknife.ButterKnife;
 
@@ -18,11 +19,10 @@ public class PrototypeActivity extends Activity {
     @SuppressWarnings("unused")
     private static final String TAG = PrototypeActivity.class.getSimpleName();
 
-
-
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        GCM.ensureGcmIdExists(this);
         setContentView(R.layout.activity_prototype);
         ButterKnife.inject(this);
     }
