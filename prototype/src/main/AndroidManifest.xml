@@ -37,13 +37,14 @@
         android:name=".PrototypeApplication"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".PrototypeActivity">
+        <activity android:name=".LoginDetectionActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity android:name=".PrototypeActivity" android:theme="@android:style/Theme.Holo.Light"/>
         <activity
             android:name=".debug.DebugActivity"
             android:theme="@android:style/Theme.Holo.Light"/>
