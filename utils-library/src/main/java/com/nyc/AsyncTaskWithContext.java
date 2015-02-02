@@ -57,4 +57,12 @@ public abstract class AsyncTaskWithContext<Params, Progress, Result> extends Asy
     //protected void onPostExecute(final Context context, final Result result) {}
 
     protected abstract Result doInBackground(final Context context, final Params... params);
+
+    protected String getString(int stringId) {
+        Context context = mContextReference.get();
+        if (context != null) {
+            context.getString(stringId);
+        }
+        return null;
+    }
 }

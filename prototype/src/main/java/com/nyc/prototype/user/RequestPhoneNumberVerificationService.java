@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.nyc.models.BaseServerResponse;
+import com.nyc.prototype.BootCompleteReceiver;
 import com.nyc.prototype.api.BasicServiceCallable;
 import com.nyc.prototype.api.RetrofitHelper;
 import com.nyc.prototype.models.server.StartPhoneNumberVerificationRequest;
@@ -27,6 +28,16 @@ public class RequestPhoneNumberVerificationService extends IntentService {
 
     @Override
     protected void onHandleIntent(final Intent intent) {
+        try {
+            doRequestPhoneNumberVerification(intent);
+        } finally {
+            if (!SimChangedReceiver.completeWakefulIntent(intent)) {
+                BootCompleteReceiver.completeWakefulIntent(intent);
+            }
+        }
+    }
+
+    protected void doRequestPhoneNumberVerification(final Intent intent) {
         String userId = CurrentUserHelper.getCurrentUserId(this);
         if (TextUtils.isEmpty(userId)) {
             Log.w(TAG, "No current user ID");
