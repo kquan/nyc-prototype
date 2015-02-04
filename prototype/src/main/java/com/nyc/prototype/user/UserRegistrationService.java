@@ -4,7 +4,7 @@ import android.app.IntentService;
 import android.content.Intent;
 import android.util.Log;
 
-import com.nyc.prototype.PrototypeApplication;
+import com.nyc.prototype.Prototype;
 
 /**
  * Created by Kevin on 1/30/2015.
@@ -29,10 +29,10 @@ public class UserRegistrationService extends IntentService {
         }
 
         if (result == null) {
-            sendBroadcast(new Intent(PrototypeApplication.Broadcasts.USER_REGISTRATION_FAILED));
+            sendBroadcast(new Intent(Prototype.Broadcasts.USER_REGISTRATION_FAILED));
         } else {
             Log.d(TAG, "User registration completed, sending broadcast.");
-            sendBroadcast(new Intent(PrototypeApplication.Broadcasts.USER_REGISTRATION_COMPLETED));
+            sendBroadcast(new Intent(Prototype.Broadcasts.USER_REGISTRATION_COMPLETED));
         }
     }
 }

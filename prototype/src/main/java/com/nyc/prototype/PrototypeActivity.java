@@ -60,7 +60,7 @@ public class PrototypeActivity extends Activity {
             mCurrentId.setText("User ID: "+CurrentUserHelper.getCurrentUserId(this));
         } else {
             mLoggedInHolder.setVisibility(View.GONE);
-            if (PreferenceUtils.getMultiProcessAwarePreferences(this).getBoolean(PrototypeApplication.Preferences.STATE_WAITING_FOR_VERIFICATION, false)) {
+            if (PreferenceUtils.getMultiProcessAwarePreferences(this).getBoolean(Prototype.Preferences.STATE_WAITING_FOR_VERIFICATION, false)) {
                 // Waiting for verification
                 mSignupHolder.setVisibility(View.GONE);
             } else {
@@ -75,8 +75,8 @@ public class PrototypeActivity extends Activity {
         mStartSignupButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
-                IntentFilter filter = new IntentFilter(PrototypeApplication.Broadcasts.USER_REGISTRATION_COMPLETED);
-                filter.addAction(PrototypeApplication.Broadcasts.USER_REGISTRATION_FAILED);
+                IntentFilter filter = new IntentFilter(Prototype.Broadcasts.USER_REGISTRATION_COMPLETED);
+                filter.addAction(Prototype.Broadcasts.USER_REGISTRATION_FAILED);
                 registerReceiver(new BroadcastReceiver() {
                     @Override public void onReceive(final Context context, final Intent intent) {
                         Log.d(TAG, "Registration completed: " + intent.getAction());

@@ -7,7 +7,7 @@ import android.util.Log;
 
 import com.nyc.CallableWithContext;
 import com.nyc.accounts.SamsungAccountHelper;
-import com.nyc.prototype.PrototypeApplication;
+import com.nyc.prototype.Prototype;
 import com.nyc.prototype.api.BasicServiceCallable;
 import com.nyc.prototype.api.CallResult;
 import com.nyc.prototype.api.PrototypeService;
@@ -96,7 +96,7 @@ public class UserRegistrationCallable extends CallableWithContext<UserRegistrati
         CurrentUserHelper.saveCurrentUserId(context, userId);
         Log.d(TAG, "Saved new user ID: "+userId);
         */
-        PreferenceUtils.getMultiProcessAwarePreferences(context).edit().putBoolean(PrototypeApplication.Preferences.STATE_WAITING_FOR_VERIFICATION, true).apply();
+        PreferenceUtils.getMultiProcessAwarePreferences(context).edit().putBoolean(Prototype.Preferences.STATE_WAITING_FOR_VERIFICATION, true).apply();
         return UserRegistrationResult.OK;
     }
 

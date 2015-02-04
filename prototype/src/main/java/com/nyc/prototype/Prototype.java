@@ -9,10 +9,10 @@ import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 /**
  * Created by Kevin on 1/29/2015.
  */
-public class PrototypeApplication extends Application {
+public class Prototype extends Application {
 
     @SuppressWarnings("unused")
-    private static final String TAG = PrototypeApplication.class.getSimpleName();
+    private static final String TAG = Prototype.class.getSimpleName();
 
     public static final String GCM_SENDER_ID = "add_this_in_later";
 

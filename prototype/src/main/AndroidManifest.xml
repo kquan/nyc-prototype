@@ -35,7 +35,7 @@
         android:allowBackup="true"
         android:label="@string/app_name"
         android:icon="@drawable/ic_launcher"
-        android:name=".PrototypeApplication"
+        android:name=".Prototype"
         android:theme="@style/AppTheme">
 
         <activity android:name=".LoginDetectionActivity">

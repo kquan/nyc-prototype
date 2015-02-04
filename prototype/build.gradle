@@ -13,7 +13,13 @@ android {
         versionName "1.0"
     }
     buildTypes {
+        debug {
+            buildConfigField "String", "PROTOTYPE_SERVICE_ENDPOINT", "\"http://www.google.com/\""
+
+        }
         release {
+            buildConfigField "String", "PROTOTYPE_SERVICE_ENDPOINT", "\"http://TBA/\""
+
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }

@@ -8,7 +8,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
-import com.nyc.prototype.PrototypeApplication;
+import com.nyc.prototype.Prototype;
 import com.nyc.utils.DateUtils;
 import com.nyc.utils.DeviceUtils;
 
@@ -150,7 +150,7 @@ public class GCM {
         GoogleCloudMessaging gcm = GoogleCloudMessaging.getInstance(context);
         String newRegistrationId = null;
         try {
-            newRegistrationId = gcm.register(PrototypeApplication.GCM_SENDER_ID);
+            newRegistrationId = gcm.register(Prototype.GCM_SENDER_ID);
         } catch (IOException ioe) {
             Log.e(TAG, "Could not call GCM to register.");
             return null;

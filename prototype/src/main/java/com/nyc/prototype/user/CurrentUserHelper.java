@@ -5,7 +5,7 @@ import android.content.SharedPreferences;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.nyc.prototype.PrototypeApplication;
+import com.nyc.prototype.Prototype;
 import com.nyc.utils.DeviceUtils;
 import com.nyc.utils.PreferenceUtils;
 
@@ -62,7 +62,7 @@ public class CurrentUserHelper {
         editor.putString(CurrentUserHelper.LAST_VERIFIED_PHONE_NUMBER_PREFERENCE_KEY, phoneNumber);
         editor.putString(CurrentUserHelper.LAST_VERIFIED_DEVICE_PREFERENCE_KEY, deviceId);
         editor.apply();
-        PreferenceUtils.getMultiProcessAwarePreferences(context).edit().remove(PrototypeApplication.Preferences.STATE_WAITING_FOR_VERIFICATION).apply();
+        PreferenceUtils.getMultiProcessAwarePreferences(context).edit().remove(Prototype.Preferences.STATE_WAITING_FOR_VERIFICATION).apply();
         return true;
     }
 

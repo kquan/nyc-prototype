@@ -1,6 +1,7 @@
 package com.nyc.prototype.api;
 
 import com.nyc.models.BaseServerResponse;
+import com.nyc.prototype.BuildConfig;
 import com.nyc.prototype.models.server.BaseServerRequest;
 import com.nyc.prototype.models.server.StartPhoneNumberVerificationRequest;
 import com.nyc.prototype.models.server.UpdateGcmIdRequest;
@@ -19,7 +20,7 @@ import retrofit.http.POST;
 public interface PrototypeService {
 
     // TBA: Update url
-    public static final String ENDPOINT_URL = "";
+    public static final String ENDPOINT_URL = BuildConfig.PROTOTYPE_SERVICE_ENDPOINT;
 
     @GET("/account/verifyPhone")
     BaseServerResponse requestPhoneNumberVerification(@Body StartPhoneNumberVerificationRequest request);

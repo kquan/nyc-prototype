@@ -17,7 +17,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.nyc.prototype.PrototypeApplication;
+import com.nyc.prototype.Prototype;
 import com.nyc.prototype.R;
 import com.nyc.prototype.gcm.GCM;
 import com.nyc.prototype.gcm.UpdateGcmIdOnServerService;
@@ -79,8 +79,8 @@ public class DebugActivity extends FragmentActivity {
                                 new LogoutAsyncTask(context) {
                                     @Override protected void onPostExecute(final Void aVoid) {
                                         super.onPostExecute(aVoid);
-                                        IntentFilter filter = new IntentFilter(PrototypeApplication.Broadcasts.USER_REGISTRATION_COMPLETED);
-                                        filter.addAction(PrototypeApplication.Broadcasts.USER_REGISTRATION_FAILED);
+                                        IntentFilter filter = new IntentFilter(Prototype.Broadcasts.USER_REGISTRATION_COMPLETED);
+                                        filter.addAction(Prototype.Broadcasts.USER_REGISTRATION_FAILED);
                                         context.registerReceiver(new BroadcastReceiver() {
                                             @Override public void onReceive(final Context context, final Intent intent) {
                                                 Log.d(TAG, "Registration completed: "+intent.getAction());
